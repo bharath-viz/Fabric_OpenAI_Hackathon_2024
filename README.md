@@ -1,6 +1,6 @@
 # Clinical Trial Finder
 
-Welcome to Clinical Trial Finder! This project aims to provide a user-friendly interface for patients suffering from diseases to discover clinical trials matching their needs and preferences. Leveraging Fabric and OpenAI's Retrieval-Augmented Generation (RAG) approach, our solution offers natural language interaction, allowing users to express their queries in everyday language.
+Patient recruitment for clinical trials presents a significant challenge, primarily due to a widespread lack of awareness about available clinical trials. Addressing this critical issue, we introduce Clinical Trial Finder. Our project is designed to bridge the gap between patients and clinical trials, making it easier for individuals seeking treatment options to find relevant studies. By leveraging the capabilities of Fabric and OpenAI's Retrieval-Augmented Generation (RAG) approach, Clinical Trial Finder provides a user-friendly platform that simplifies the search process. Our solution enhances accessibility through natural language interaction, enabling users to articulate their queries in everyday language. This ensures that patients can effortlessly discover clinical trials that align with their specific needs and preferences, thereby facilitating better patient engagement and recruitment in clinical research.
 
 > Source data
   - www.ClinicalTrials.gov
