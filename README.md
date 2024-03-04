@@ -1,5 +1,3 @@
-# Fabric_OpenAI_Hackathon_2024
-Developing an innovative solution leveraging Fabric and OpenAI's Retrieval-Augmented Generation (RAG) approach to enable patients suffering from diseases to easily find clinical trials matching their needs and preferences
 # Clinical Trial Finder
 
 Welcome to Clinical Trial Finder! This project aims to provide a user-friendly interface for patients suffering from diseases to discover clinical trials matching their needs and preferences. Leveraging Fabric and OpenAI's Retrieval-Augmented Generation (RAG) approach, our solution offers natural language interaction, allowing users to express their queries in everyday language.
