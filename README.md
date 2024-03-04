@@ -2,6 +2,12 @@
 
 Welcome to Clinical Trial Finder! This project aims to provide a user-friendly interface for patients suffering from diseases to discover clinical trials matching their needs and preferences. Leveraging Fabric and OpenAI's Retrieval-Augmented Generation (RAG) approach, our solution offers natural language interaction, allowing users to express their queries in everyday language.
 
+> Source data
+  - www.ClinicalTrials.gov
+  - https://www.clinicaltrials.gov/data-api/api
+  - https://www.unitedstateszipcodes.org/zip-code-database/
+
+
 ## Features
 
 - **Natural Language Interaction**: Users can input their queries in natural language, making the search process intuitive and accessible.
