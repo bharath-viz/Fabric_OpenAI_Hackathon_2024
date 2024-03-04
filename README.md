@@ -4,7 +4,16 @@ Patient recruitment for clinical trials presents a significant challenge, primar
 
 > Source data
   - www.ClinicalTrials.gov
+  - 
+    ![image](https://github.com/bharath-viz/Fabric_OpenAI_Hackathon_2024/assets/39288305/f8ce7936-8fe6-4513-a4c2-42b98d018974)
+    ![image](https://github.com/bharath-viz/Fabric_OpenAI_Hackathon_2024/assets/39288305/8fdd98d4-f6d7-4a6b-af54-bdcb2f2a5146)
+    ![image](https://github.com/bharath-viz/Fabric_OpenAI_Hackathon_2024/assets/39288305/7948361b-8b42-46d6-a462-6bc57c8ecf7e)
+
+
+
   - https://www.clinicaltrials.gov/data-api/api
+    ![image](https://github.com/bharath-viz/Fabric_OpenAI_Hackathon_2024/assets/39288305/7823276f-f47c-4014-a6e4-a3209835a24a)
+
   - https://www.unitedstateszipcodes.org/zip-code-database/
 
 
