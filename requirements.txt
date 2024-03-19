@@ -1,0 +1,2 @@
+faiss-cpu
+sentence-transformers

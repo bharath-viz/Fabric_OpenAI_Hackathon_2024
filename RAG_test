@@ -3,7 +3,6 @@ import pandas as pd
 import numpy as np
 import faiss
 from sentence_transformers import SentenceTransformer
-import pandas as pd
 
 # Sample sentences about the top 20 billionaires in the US
 sentences = [
@@ -32,20 +31,20 @@ sentences = [
 # Creating a DataFrame with a single column of sentences
 df = pd.DataFrame({'Billionaires_Info': sentences})
 
-
 # Combine selected fields for each row into a single document string
 documents = df['Billionaires_Info'].tolist()
-model_name='all-MiniLM-L6-v2'
+model_name = 'all-MiniLM-L6-v2'
 
 model = SentenceTransformer(model_name)
 embeddings = model.encode(documents, convert_to_tensor=False)
 embeddings = np.array(embeddings)
 dimension = embeddings.shape[1]
-index = faiss.IndexFlatL2(dimension)  # Use L2 distance for similari
+index = faiss.IndexFlatL2(dimension)  # Use L2 distance for similarity
 np.save("embeddings.npy", embeddings)
-faiss.write_index(index,"faiss_index.index")
+faiss.write_index(index, "faiss_index.index")
 embeddings = np.load("embeddings.npy")
 index = faiss.read_index("faiss_index.index")
+
 
 def rag_response(query="list all female billionaires", k=1):
     print(f"nct_string:", query)
@@ -54,19 +53,20 @@ def rag_response(query="list all female billionaires", k=1):
     print(D, I)
 
     data = []
-    for i, idx in enumerate(I):
+    for i, idx in enumerate(I[0]):  # Iterate over the first set of results
         # Assuming `documents` is a list where each element is a document string
-        document = documents  # Retrieve the document using the index from FAISS        
+        document = documents[idx]  # Retrieve the document using the index from FAISS
         # Create a dictionary for the current document with its index, distance, and content
         row = {
             'Index': idx,
-            'Distance': D,  # Correct indexing for distance
+            'Distance': D[0][i],  # Correct indexing for distance
             'Document': document
         }
-        # Add the dictionary to our list            
+        # Add the dictionary to our list
         data.append(row)
     return data  # Move the return statement outside the for loop
 
-resp = rag_response(query="google", k=10)
+
+resp = rag_response(query="google", k=1)
 df = pd.DataFrame(resp)
 print(df)
