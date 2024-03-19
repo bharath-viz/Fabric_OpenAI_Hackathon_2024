@@ -1,0 +1,72 @@
+import os
+import pandas as pd
+import numpy as np
+import faiss
+from sentence_transformers import SentenceTransformer
+import pandas as pd
+
+# Sample sentences about the top 20 billionaires in the US
+sentences = [
+    "Jeff Bezos is the founder of Amazon and one of the richest people in the world.",
+    "Elon Musk, known for Tesla and SpaceX, is among the top billionaires in the US.",
+    "Bill Gates, the co-founder of Microsoft, has been a prominent figure among US billionaires.",
+    "Mark Zuckerberg, the co-founder of Facebook, is one of the youngest billionaires in the US.",
+    "Warren Buffett, known as the 'Oracle of Omaha', is a legendary investor and billionaire in the US.",
+    "Larry Ellison, the co-founder of Oracle Corporation, is a prominent figure among US billionaires.",
+    "Larry Page and Sergey Brin, the co-founders of Google, are among the top billionaires in the US.",
+    "Steve Ballmer, the former CEO of Microsoft, is a well-known figure among US billionaires.",
+    "Alice Walton, heiress to the Walmart fortune, is one of the wealthiest women in the US.",
+    "Michael Bloomberg, the co-founder of Bloomberg L.P., is a notable billionaire in the US.",
+    "Jim Walton, another heir to the Walmart fortune, is among the top billionaires in the US.",
+    "Rob Walton, the eldest son of Walmart's founder, is a prominent figure in the list of US billionaires.",
+    "Charles Koch, known for Koch Industries, is a well-known billionaire in the US.",
+    "Julia Koch, the widow of David Koch, is among the top female billionaires in the US.",
+    "Elon Musk, known for Tesla and SpaceX, is among the top billionaires in the US.",
+    "Larry Page and Sergey Brin, the co-founders of Google, are among the top billionaires in the US.",
+    "Sheldon Adelson, known for the casino industry, was a prominent figure among US billionaires.",
+    "Sergey Brin, along with Larry Page, co-founded Google and is among the top billionaires in the US.",
+    "Michael Dell, the founder of Dell Technologies, is a notable billionaire in the US.",
+    "Phil Knight, the co-founder of Nike, is among the top Google billionaires in the US."
+]
+
+# Creating a DataFrame with a single column of sentences
+df = pd.DataFrame({'Billionaires_Info': sentences})
+
+
+# Combine selected fields for each row into a single document string
+documents = df['Billionaires_Info'].tolist()
+model_name='all-MiniLM-L6-v2'
+
+model = SentenceTransformer(model_name)
+embeddings = model.encode(documents, convert_to_tensor=False)
+embeddings = np.array(embeddings)
+dimension = embeddings.shape[1]
+index = faiss.IndexFlatL2(dimension)  # Use L2 distance for similari
+np.save("embeddings.npy", embeddings)
+faiss.write_index(index,"faiss_index.index")
+embeddings = np.load("embeddings.npy")
+index = faiss.read_index("faiss_index.index")
+
+def rag_response(query="list all female billionaires", k=1):
+    print(f"nct_string:", query)
+    query_vec = model.encode([query])
+    D, I = index.search(query_vec, k)
+    print(D, I)
+
+    data = []
+    for i, idx in enumerate(I):
+        # Assuming `documents` is a list where each element is a document string
+        document = documents  # Retrieve the document using the index from FAISS        
+        # Create a dictionary for the current document with its index, distance, and content
+        row = {
+            'Index': idx,
+            'Distance': D,  # Correct indexing for distance
+            'Document': document
+        }
+        # Add the dictionary to our list            
+        data.append(row)
+    return data  # Move the return statement outside the for loop
+
+resp = rag_response(query="google", k=10)
+df = pd.DataFrame(resp)
+print(df)
